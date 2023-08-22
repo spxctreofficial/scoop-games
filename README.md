@@ -1,6 +1,8 @@
-# scoop-games [![Tests](https://github.com/Calinou/scoop-games/actions/workflows/ci.yml/badge.svg)](https://github.com/Calinou/scoop-games/actions/workflows/ci.yml) [![Excavator](https://github.com/Calinou/scoop-games/actions/workflows/excavator.yml/badge.svg)](https://github.com/Calinou/scoop-games/actions/workflows/excavator.yml) [![Repo size](https://img.shields.io/github/repo-size/Calinou/scoop-games.svg?style=flat-square)](https://github.com/Calinou/scoop-games) [![Mentioned in Awesome Scoop](https://awesome.re/mentioned-badge.svg)](https://github.com/ScoopInstaller/Awesome)
+# spxctreofficial/scoop-games [![Tests](https://github.com/Calinou/scoop-games/actions/workflows/ci.yml/badge.svg)](https://github.com/Calinou/scoop-games/actions/workflows/ci.yml) [![Excavator](https://github.com/Calinou/scoop-games/actions/workflows/excavator.yml/badge.svg)](https://github.com/Calinou/scoop-games/actions/workflows/excavator.yml) [![Repo size](https://img.shields.io/github/repo-size/Calinou/scoop-games.svg?style=flat-square)](https://github.com/Calinou/scoop-games) [![Mentioned in Awesome Scoop](https://awesome.re/mentioned-badge.svg)](https://github.com/ScoopInstaller/Awesome)
 
 A [Scoop](https://scoop.sh/) bucket for open source/freeware games and game-related tools.
+
+This bucket syncs upstream with the main [scoop-games] repository, but with a few extra manifests that didn't necessarily make the pull request.
 
 ## List of applications in this bucket
 
