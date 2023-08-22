@@ -1,0 +1,75 @@
+{
+    "version": "7.2",
+    "description": "An open source Minecraft launcher with the ability to manage multiple instances, accounts and mods. Focused on user freedom and free redistributability. Qt 5 build that still supports legacy Windows like 8.1 and 7.",
+    "homepage": "https://polymc.org/",
+    "license": "GPL-3.0-only",
+    "notes": [
+        "To add PolyMC file association options for .ZIPs and .MRPACKS, run this: \"$dir\\install-associations.reg\"",
+        "",
+        "This package is now using the portable version of PolyMC, and data should have been migrated automatically.",
+        "If you are using a global install on a system with more than one user, you will need to copy a user's data from %appdata% to the new Scoop PolyMC persist directory"
+    ],
+    "url": "https://github.com/PolyMC/PolyMC/releases/download/5.1/PolyMC-Windows-Legacy-Portable-5.1.zip",
+    "hash": "fafa1e90d85f45cee27cac3338dda819272052439e7e28a5983ad49c195cb076",
+    "suggest": {
+        "Microsoft Visual C++ Redistributables": "extras/vcredist2022"
+    },
+    "pre_install": [
+        "$migration = $true",
+        "$visibleUserAccounts = Get-LocalUser | Where-Object { $_.Enabled -eq $true }",
+        "if ($global -and $visibleUserAccounts.Count -gt 1) { $migration = $false }",
+        "",
+        "$appdataPath = \"$HOME\\AppData\\Roaming\\PolyMC\"",
+        "if ((Test-Path -Path $appdataPath\\*) -and (!(Test-Path -Path $persist_dir\\*)) -and $migration) {",
+        "    Write-Warning \"Migrating data from $appdataPath to $persist_dir (this may take a while)\"",
+        "    New-Item -Type Directory -Path $persist_dir | Out-Null",
+        "    Copy-Item -Recurse -Force $appdataPath\\* $persist_dir\\",
+        "} elseif (!($migration)) {",
+        "    Write-Warning \"A global Scoop installation was detected with multiple user accounts. Please see the notes at the end of the install process.\"",
+        "}",
+        "",
+        "'accounts.json', 'metacache', 'polymc.cfg' | ForEach-Object {",
+        "    if (!(Test-Path -Path $persist_dir\\$_)) {",
+        "        New-Item -Type File $dir/$_ | Out-Null",
+        "    }",
+        "}"
+    ],
+    "post_install": [
+        "'install-associations', 'uninstall-associations' | ForEach-Object {",
+        "    if (Test-Path \"$bucketsdir\\games\\scripts\\polymc-qt5\\$_.reg\") {",
+        "        $exePath = \"$dir\\polymc.exe\".Replace('\\', '\\\\')",
+        "        $content = (Get-Content \"$bucketsdir\\games\\scripts\\polymc-qt5\\$_.reg\").Replace('$EXEPATH', $exePath)",
+        "        if ($global) { $content = $content.Replace('HKEY_CURRENT_USER', 'HKEY_LOCAL_MACHINE') }",
+        "        Set-Content \"$dir\\$_.reg\" $content -Encoding Ascii -Force",
+        "    }",
+        "}"
+    ],
+    "bin": "polymc.exe",
+    "shortcuts": [
+        [
+            "polymc.exe",
+            "PolyMC"
+        ]
+    ],
+    "persist": [
+        "assets",
+        "cache",
+        "icons",
+        "instances",
+        "libraries",
+        "logs",
+        "meta",
+        "mods",
+        "themes",
+        "translations",
+        "accounts.json",
+        "metacache",
+        "polymc.cfg"
+    ],
+    "checkver": {
+        "github": "https://github.com/PolyMC/PolyMC"
+    },
+    "autoupdate": {
+        "url": "https://github.com/PolyMC/PolyMC/releases/download/$version/PolyMC-Windows-Legacy-Portable-$version.zip"
+    }
+}
