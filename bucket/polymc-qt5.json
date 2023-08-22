@@ -10,7 +10,7 @@
         "If you are using a global install on a system with more than one user, you will need to copy a user's data from %appdata% to the new Scoop PolyMC persist directory"
     ],
     "url": "https://github.com/PolyMC/PolyMC/releases/download/5.1/PolyMC-Windows-Legacy-Portable-5.1.zip",
-    "hash": "fafa1e90d85f45cee27cac3338dda819272052439e7e28a5983ad49c195cb076",
+    "hash": "7f1329ed260a866936218bf291769ac9f9daa685856c4753ce789e6885f57d3a",
     "suggest": {
         "Microsoft Visual C++ Redistributables": "extras/vcredist2022"
     },
